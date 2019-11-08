@@ -22,7 +22,7 @@ defmodule ElixirStudy do
   def fizz_buzz(_,0,_), do: "Buzz"
   def fizz_buzz(_,_,c), do: c
 
-  fizz_buzz_as_annonymous = fn
+  fizz_buzz_as_anonymous = fn
     0,0,_ -> "FizzBuzz"
     0,_,_ -> "Fizz"
     _,0,_ -> "Buzz"

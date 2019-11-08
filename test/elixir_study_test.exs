@@ -15,6 +15,6 @@ defmodule ElixirStudyTest do
   end
 
   test "When neither of the first two args are 0, it returns the third arg" do
-    assert ElixirStudy.fizz_buzz(0,1,2) == "Fizz"
+    assert ElixirStudy.fizz_buzz(1,1,2) == 2
   end
 end
