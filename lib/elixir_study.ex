@@ -6,6 +6,9 @@ defmodule ElixirStudy do
   @doc """
   FizzBuzz.
 
+  ## Parameters
+    - 3 Integers
+
   ## Examples
 
       iex> ElixirStudy.fizz_buzz(0,0,1)
@@ -27,5 +30,24 @@ defmodule ElixirStudy do
     0,_,_ -> "Fizz"
     _,0,_ -> "Buzz"
     _,_,c -> c
+  end
+
+  @doc """
+  FizzBuzzSentence.
+
+  ## Parameters
+    - n: Integer
+
+  ## Examples
+
+      iex> ElixirStudy.fizz_buzz_sentence(10)
+      "Buzz"
+      iex> ElixirStudy.fizz_buzz_sentence(13)
+      13
+      iex> ElixirStudy.fizz_buzz_sentence(16)
+      16
+  """
+  def fizz_buzz_sentence(n) do
+    fizz_buzz(rem(n,3), rem(n,5), n)
   end
 end
