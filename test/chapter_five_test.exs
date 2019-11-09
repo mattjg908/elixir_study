@@ -45,4 +45,10 @@ defmodule ChapterFiveTest do
       assert ChapterFive.fizz_buzz_sentence(16) === 16
     end
   end
+
+	describe "#closure_concat" do
+    test "it concatenates two words and a space" do
+      assert ChapterFive.closure_concat('Elixir', 'Rocks') === "Elixir Rocks"
+		end
+	end
 end

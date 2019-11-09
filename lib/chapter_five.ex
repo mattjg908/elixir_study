@@ -4,7 +4,7 @@ defmodule ChapterFive do
   """
 
   @doc """
-  FizzBuzz.
+  ChapterFive.fizz_buzz
 
   ## Parameters
     - 3 Integers
@@ -33,7 +33,7 @@ defmodule ChapterFive do
   end
 
   @doc """
-  FizzBuzzSentence.
+  ChapterFive.fizz_buzz_sentence
 
   ## Parameters
     - n: Integer
@@ -50,4 +50,18 @@ defmodule ChapterFive do
   def fizz_buzz_sentence(n) do
     fizz_buzz(rem(n,3), rem(n,5), n)
   end
+
+  @doc """
+  ChapterFive.closure_concat
+
+  ## Parameters
+    - a_string: String
+		- b_string: String
+
+  ## Examples
+
+      iex> ChapterFive.closure_concat('Elixir', 'Rocks')
+      "Elixir Rocks"
+  """
+  def closure_concat(a_string,b_string), do: "#{a_string} #{b_string}"
 end
