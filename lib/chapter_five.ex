@@ -64,4 +64,32 @@ defmodule ChapterFive do
       "Elixir Rocks"
   """
   def closure_concat(a_string,b_string), do: "#{a_string} #{b_string}"
+
+  @doc """
+  ChapterFive.func_capture_operator_add_two
+
+  ## Parameters
+    - arr: Array of integers
+
+  ## Examples
+
+      iex> ChapterFive.func_capture_operator_add_two([1,2,3,4])
+      Enum.map [1,2,3,4], fn x -> x + 2 end
+
+  """
+  def func_capture_operator_add_two(arr), do: Enum.map arr, &(&1 + 2)
+
+  @doc """
+  ChapterFive.func_capture_operator_inspect
+
+  ## Parameters
+    - arr: Array of integers
+
+  ## Examples
+
+      iex> ChapterFive.func_capture_operator_inspect([1,2,3,4])
+      Enum.each [1,2,3,4], fn x -> IO.inspect x end
+
+  """
+  def func_capture_operator_inspect(arr), do: Enum.each arr, &IO.inspect/1
 end

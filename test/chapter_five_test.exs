@@ -51,4 +51,16 @@ defmodule ChapterFiveTest do
       assert ChapterFive.closure_concat('Elixir', 'Rocks') === "Elixir Rocks"
 		end
 	end
+
+	describe "#func_capture_operator_add_two" do
+    test "it proves using function capture operator is equivalent to not using shorthand" do
+      assert ChapterFive.func_capture_operator_add_two([1,2,3,4]) === Enum.map [1,2,3,4], fn x -> x + 2 end
+		end
+	end
+
+	describe "#func_capture_operator_inspect" do
+    test "it proves using function capture operator is equivalent to not using shorthand" do
+      assert ChapterFive.func_capture_operator_inspect([1,2,3,4]) === Enum.each [1,2,3,4], fn x -> IO.inspect x end
+		end
+	end
 end
