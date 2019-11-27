@@ -33,8 +33,8 @@ defmodule ListRecursionExample do
 
   def max([]), do: []
   def max([x]), do: x
-  def max([index0 | [index1 | tail]]) when index0 > index1, do: max([index0 | tail])
-  def max([_index0 | tail]), do: max(tail)
+  def max([a, b | tail_without_b]) when a > b, do: max([a | tail_without_b])
+  def max([_head | tail]), do: max(tail)
 
   @doc """
   ListRecursionExample.caesar
