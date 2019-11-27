@@ -54,4 +54,21 @@ defmodule ListRecursionExample do
 
   def caesar([], _), do: []
   def caesar([h | t], n), do: [rem(h + n - 97, 26) + 97 | caesar(t, n)]
+
+  @doc """
+  ListRecursionExample.span
+
+  ## Parameters
+     -from Integer
+     -to Integer
+
+  ## Examples
+
+    iex> ListRecursionExample.span(0, 10)
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  """
+
+  def span(from, to) when from > to, do: "This function only counts up, #{from} is more than #{to}."
+  def span(from, to) when from < to, do: [ from | span(from + 1, to) ]
+  def span(to, to), do: [to]
 end

@@ -29,4 +29,10 @@ defmodule ListRecursionExampleTest do
       assert ListRecursionExample.caesar('z', 52) === 'z'
     end
   end
+
+  describe "#span" do
+    test "returns a list of the numbers from `from` up to `to`" do
+      assert ListRecursionExample.span(1, 4) === [1, 2, 3, 4]
+    end
+  end
 end
