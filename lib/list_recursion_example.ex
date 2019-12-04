@@ -33,14 +33,14 @@ defmodule ListRecursionExample do
 
   def max([]), do: []
   def max([x]), do: x
-  def max([a, b | tail_without_b]) when a > b, do: max([a | tail_without_b])
-  def max([_head | tail]), do: max(tail)
+  def max([a, b | t]) when a > b, do: max([a | t])
+  def max([_head | t]), do: max(t)
 
   @doc """
   ListRecursionExample.caesar
 
   ## Parameters
-    -List
+    - Charlist
     -n Integer
 
     97 represents 'a', [97]
@@ -52,8 +52,9 @@ defmodule ListRecursionExample do
       'elixir'
   """
 
+  def caesar(charlist, offset \\ 42)
   def caesar([], _), do: []
-  def caesar([h | t], n), do: [rem(h + n - 97, 26) + 97 | caesar(t, n)]
+  def caesar([h | t], offset), do: [rem(h + offset - 97, 26) + 97 | caesar(t, offset)]
 
   @doc """
   ListRecursionExample.span
@@ -68,7 +69,8 @@ defmodule ListRecursionExample do
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   """
 
-  def span(from, to) when from > to, do: "This function only counts up, #{from} is more than #{to}."
-  def span(from, to) when from < to, do: [ from | span(from + 1, to) ]
-  def span(to, to), do: [to]
+  def span(from, to) when is_integer(from) and is_integer(to), do: do_span(from, to)
+  defp do_span(from, to) when from > to, do: raise "This function only counts up, #{from} is more than #{to}."
+  defp do_span(from, to) when from < to, do: [ from | span(from + 1, to) ]
+  defp do_span(to, to), do: [to]
 end
