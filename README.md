@@ -1,6 +1,12 @@
 # ElixirStudy
 
-**TODO: Add description**
+Exercises from "Programming Elixir >= 1.6" by Dave Thomas (not the KFC guy)
+
+# Running Tests
+$ mix test.watch test/example_test.exs
+
+# Running benchmarks
+$ mix run benchmarks/example_benchmark.exs
 
 ## Installation
 

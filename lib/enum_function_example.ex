@@ -1,5 +1,5 @@
 #https://github.com/MachinesAreUs/programming_elixir/blob/master/ch7/chapter_7.exs
-
+require IEx
 defmodule EnumFunctionExample do
   @moduledoc """
   Documentations for EnumFunctionExample.
@@ -71,8 +71,8 @@ defmodule EnumFunctionExample do
   EnumFunctionExample.enum_split
 
   ## Parameters
-    -      List of integers
-    -count Integer used to determine where an array should be split
+    - List of integers
+    - count Integer used to determine where an array should be split
 
     ## Examples
 
@@ -93,10 +93,10 @@ defmodule EnumFunctionExample do
   EnumFunctionExample.enum_take
 
   ## Parameters
-    -     List
+    -  List of lists
     -n number of elements in list to take
 
-		## Examples
+    ## Examples
 
       iex> EnumFunctionExample.enum_take([1,2,3,4], 3)
       [1,2,3]
@@ -107,11 +107,11 @@ defmodule EnumFunctionExample do
 
   def enum_take(list, n), do: _enum_take(list, [], n)
   def _enum_take([h|t], acc, n) when length(acc) < n do
-	  _enum_take(t, [h | acc], n)
+    _enum_take(t, [h | acc], n)
   end
   def _enum_take([h|t], _acc, n) when length([h|t]) > abs(n) do
     _enum_take(t, [], n)
-	end
+  end
   def _enum_take(_list, acc, n) when n >= 0, do: Enum.reverse acc
   def _enum_take(list, _acc, _n), do: list
 
@@ -121,11 +121,15 @@ defmodule EnumFunctionExample do
   ## Parameters
     - List
 
-		## Examples
+  ## Examples
 
-		   iex> MyList.flatten([1, [2, 3, [4]], 5, [[[6]]]])
-		   [1,2,3,4,5,6]
+     iex> EnumFunctionExample.enum_flatten([1, [2, 3, [4]], 5, [[[6]]]])
+     [1,2,3,4,5,6]
   """
-  def enum_flatten(list), do: _enum_flatten(list)
-  def _enum_flatten(_list), do: true
+  def enum_flatten(list), do: _enum_flatten(list, [])
+  def _enum_flatten([h|t], acc) when is_list(h) do
+   _enum_flatten(h, _enum_flatten(t, acc))
+ end
+ def _enum_flatten([h|t], acc), do: [h|_enum_flatten(t, acc)]
+ def _enum_flatten([], acc), do: acc
 end

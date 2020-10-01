@@ -1,5 +1,5 @@
 defmodule RecursionExampleTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest RecursionExample
 
   describe "#sum" do
@@ -8,7 +8,7 @@ defmodule RecursionExampleTest do
     end
   end
 
-	describe "RecursionExample.gcd/2" do
+  describe "RecursionExample.gcd/2" do
     assert RecursionExample.gcd(49, 28) === 7
-	end
+  end
 end

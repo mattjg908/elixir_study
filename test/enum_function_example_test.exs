@@ -1,5 +1,5 @@
 defmodule EnumFunctionExampleTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest EnumFunctionExample
 
   describe "#enum_all?" do
@@ -45,16 +45,16 @@ defmodule EnumFunctionExampleTest do
 
   describe "#enum_take" do
     test "it implements the #take Enum function without library functions nor list comprehensions" do
-		  assert EnumFunctionExample.enum_take([1,2,3], -4) == [1,2,3]
-		  assert EnumFunctionExample.enum_take([1,2,3], -1) == [3]
-		  assert EnumFunctionExample.enum_take([1,2,3], 0) == []
-		  assert EnumFunctionExample.enum_take([1,2,3], 10) == [1,2,3]
+      assert EnumFunctionExample.enum_take([1,2,3], -4) == [1,2,3]
+      assert EnumFunctionExample.enum_take([1,2,3], -1) == [3]
+      assert EnumFunctionExample.enum_take([1,2,3], 0) == []
+      assert EnumFunctionExample.enum_take([1,2,3], 10) == [1,2,3]
     end
   end
 
   describe "#enum_flatten" do
-	  test "it implements the #flatten Enum function without library functions nor list comprehensions" do
-		  EnumFunctionExample.enum_.flatten([ 1, [ 2, 3, [4] ], 5, [[[6]]]]) == [1,2,3,4,5,6]
-		end
+    test "it implements the #flatten Enum function without library functions nor list comprehensions" do
+      assert EnumFunctionExample.enum_flatten([ 1, [ 2, 3, [4] ], 5, [[[6]]]]) == [1,2,3,4,5,6]
+    end
   end
 end

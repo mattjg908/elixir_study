@@ -1,5 +1,5 @@
 defmodule ChopTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Chop
 
   import ExUnit.CaptureIO

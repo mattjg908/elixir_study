@@ -1,5 +1,5 @@
 defmodule ListRecursionExampleTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest ListRecursionExample
 
   describe "#mapsum" do
