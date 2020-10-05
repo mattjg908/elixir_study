@@ -23,7 +23,8 @@ defmodule ComprehensionExample do
   def prime_span(from, to),
     do: for n <- ListRecursionExample.span(from, to), n != 1, n == 2 or _prime?(n), do: n
 
-  defp _prime?(n), do: !Enum.find(2..(n-1), &Integer.gcd(n, &1) != 1)
+  defp _prime?(n),
+    do: !Enum.find(2..(n-1), &Integer.gcd(n, &1) != 1)
 
   @doc """
   ComprehensionExample.calc_tax
