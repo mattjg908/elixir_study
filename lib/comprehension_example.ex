@@ -4,7 +4,7 @@ defmodule ComprehensionExample do
   """
 
   @doc """
-  ComprehensionExample.span
+  ComprehensionExample.prime_span
 
   In the last exercise of Chapter 7, Lists and Recursion, you wrote a span
   function. Use it and list comprehensions to return a list of the prime numbers
@@ -16,14 +16,14 @@ defmodule ComprehensionExample do
 
   ## Examples
 
-    iex> ComprehensionExample.span(0, 10)
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    iex> ComprehensionExample.prime_span(0, 12)
+    [2, 3, 5, 7, 11]
 
   """
-  def span(from, to) when is_integer(from) and is_integer(to), do: do_span(from, to)
-  defp do_span(from, to) when from > to, do: raise "This function only counts up, #{from} is more than #{to}."
-  #defp do_span(from, to) when from < to, do: [ from | span(from + 1, to) ]
-  #defp do_span(to, to), do: [to]
+  def prime_span(from, to),
+    do: for n <- ListRecursionExample.span(from, to), n != 1, n == 2 or _prime?(n), do: n
+
+  defp _prime?(n), do: !Enum.find(2..(n-1), &Integer.gcd(n, &1) != 1)
 
   @doc """
   ComprehensionExample.calc_tax
@@ -44,5 +44,6 @@ defmodule ComprehensionExample do
   # TODO, what are the typespecs for BigDecimal?
   @spec calc_tax([NC: float(), TX: float()], [ [id: pos_integer(), ship_to: atom(), net_amount: float() ] ]) :: [ [id: pos_integer(), ship_to: atom(), net_amount: float(), total_amount: number() ] ]
   def calc_tax(tax_rates, orders)
+  def calc_tax(tax_rates, orders), do: {tax_rates, orders}
 
 end

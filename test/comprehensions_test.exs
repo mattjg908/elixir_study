@@ -2,13 +2,13 @@ defmodule ComprehensionExampleTest do
   use ExUnit.Case, async: true
   doctest ComprehensionExample
 
-  describe "#span/2" do
-    test "returns a list of the integers from `from` up to `to`" do
-      assert ComprehensionExample.span(1, 4) === [1, 2, 3, 4]
+  describe "prime_span/2" do
+    test "Returns a list of prime numbers from 2 to n" do
+      assert ComprehensionExample.prime_span(1, 6) === [2,3,5]
     end
   end
 
-  describe "#calc_tax/2" do
+  describe "calc_tax/2" do
     setup do
       orders = [
         [ id: 123, ship_to: :NC, net_amount: 100.00 ],
@@ -24,7 +24,8 @@ defmodule ComprehensionExampleTest do
       {:ok, tax_rates: [ NC: 0.075, TX: 0.08 ], orders: orders}
     end
 
-    test "returns a list of orders with an extra field, total_amount, which is equal to the order's net_amount plus sales tax`", {tax_rates: tax_rates, orders: orders} do
+    @tag :pending
+    test "Returns a list of orders with an extra field, total_amount, which is equal to the order's net_amount plus sales tax`", %{tax_rates: tax_rates, orders: orders} do
       for order <- ComprehensionExample.calc_tax(tax_rates, orders) do
         tax_rate = Keyword.get(tax_rates, order[:ship_to], 0)
         assert order.total_amount == order.net_amount * (1 + tax_rate)
