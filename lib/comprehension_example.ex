@@ -3,6 +3,8 @@ defmodule ComprehensionExample do
   Documentation for comprehensions examples.
   """
 
+  @zero_tax_rate 0.0
+
   @doc """
   ComprehensionExample.prime_span
 
@@ -41,10 +43,14 @@ defmodule ComprehensionExample do
      - Keyword list (state taxes)
      - Keyword list (orders)
 
+  ## Examples
+
+  iex> ComprehensionExample.calc_tax([PA: 0.10, CA: 0.05], [[id: 1, ship_to: :PA, net_amount: 100], [id: 2, ship_to: :CA, net_amount: 10], [id: 3, ship_to: :HI, net_amount: 1]])
+  [[id: 1, ship_to: :PA, net_amount: 100, total_amount: 110.00], [id: 2, ship_to: :CA, net_amount: 10, total_amount: 10.50], [id: 3, ship_to: :HI, net_amount: 1, total_amount: 1.0]]
+
   """
-  # TODO, what are the typespecs for BigDecimal?
   @spec calc_tax([NC: float(), TX: float()], [ [id: pos_integer(), ship_to: atom(), net_amount: float() ] ]) :: [ [id: pos_integer(), ship_to: atom(), net_amount: float(), total_amount: number() ] ]
-  def calc_tax(tax_rates, orders)
-  def calc_tax(tax_rates, orders), do: {tax_rates, orders}
+  def calc_tax(tax_rates, orders),
+    do: for [id: _id, ship_to: state, net_amount: amount] = order <- orders, tax <- [amount * Keyword.get(tax_rates, state, @zero_tax_rate)], do: order ++ [total_amount: amount + tax]
 
 end
