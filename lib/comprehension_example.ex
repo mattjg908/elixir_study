@@ -54,7 +54,7 @@ defmodule ComprehensionExample do
     state_tax = fn state -> Keyword.get(tax_rates, state, @zero_tax_rate) end
     calc_total = fn amount, state -> amount + amount * state_tax.(state) end
 
-    for order <- orders, total_amount <- [total_amount: calc_total.(order[:net_amount], order[:ship_to])], do: order ++ [total_amount]
+    for order <- orders, total <- [calc_total.(order[:net_amount], order[:ship_to])], do: order ++ [total_amount: total]
   end
 
 end
