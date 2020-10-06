@@ -1,6 +1,6 @@
 defmodule ComprehensionExample do
   @moduledoc """
-  Documentation for comprehensions examples.
+  Module for comprehensions examples.
   """
 
   @zero_tax_rate 0.0
