@@ -50,7 +50,11 @@ defmodule ComprehensionExample do
 
   """
   @spec calc_tax([NC: float(), TX: float()], [ [id: pos_integer(), ship_to: atom(), net_amount: float() ] ]) :: [ [id: pos_integer(), ship_to: atom(), net_amount: float(), total_amount: number() ] ]
-  def calc_tax(tax_rates, orders),
-    do: for [id: _id, ship_to: state, net_amount: amount] = order <- orders, tax <- [amount * Keyword.get(tax_rates, state, @zero_tax_rate)], do: order ++ [total_amount: amount + tax]
+  def calc_tax(tax_rates, orders) do
+    state_tax = fn state -> Keyword.get(tax_rates, state, @zero_tax_rate) end
+    calc_total = fn amount, state -> amount + amount * state_tax.(state) end
+
+    for order <- orders, total_amount <- [total_amount: calc_total.(order[:net_amount], order[:ship_to])], do: order ++ [total_amount]
+  end
 
 end
