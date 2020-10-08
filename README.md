@@ -2,26 +2,18 @@
 
 Exercises from "Programming Elixir >= 1.6" by Dave Thomas (not the KFC guy)
 
-# Running Tests
+# Run all tests
+$ mix test
+
+# Run specific tests
+$ mix test test/example_test.exs
+
+# Run specific tests w/ Pry debugger
+place `require IEx; IEx.pry` wherever you'd like to pause execution
+$ iex -S mix test test/example_test.exs
+
+# Run tests w/ TestWatch
 $ mix test.watch test/example_test.exs
 
-# Running benchmarks
+# Run benchmarks
 $ mix run benchmarks/example_benchmark.exs
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `elixir_study` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:elixir_study, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/elixir_study](https://hexdocs.pm/elixir_study).
-
