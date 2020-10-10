@@ -81,26 +81,19 @@ defmodule CharlistExample do
 
   """
   @spec calculate(nonempty_charlist()) :: number()
-  def calculate(charlist) do
-    charlist
-    |> parse_charlist
-    |> do_calc
-  end
+  def calculate(charlist), do: do_calc(charlist)
 
-  @spec parse_charlist(charlist()) :: tuple()
-  defp parse_charlist(charlist) do
+  @spec do_calc(charlist()) :: tuple()
+  defp do_calc(charlist) do
     [x, operator, y] =
       charlist
       |> to_string
       |> String.split(" ")
 
-    {string_to_float(x), string_to_fun(operator), string_to_float(y)}
-  end
-
-  @spec string_to_float(String.t()) :: float()
-  defp string_to_float(number_string) do
-    {num, _} = Float.parse(number_string)
-    num
+    string_to_fun(operator).(
+      string_to_float(x),
+      string_to_float(y)
+    )
   end
 
   @spec string_to_fun(String.t()) :: fun()
@@ -109,8 +102,10 @@ defmodule CharlistExample do
   defp string_to_fun("*"), do: &*/2
   defp string_to_fun("/"), do: &//2
 
-  # TODO, how to make a List typespec with multiple types?
-  @spec do_calc(tuple()) :: number()
-  defp do_calc({x, fun, y}), do: fun.(x, y)
+  @spec string_to_float(String.t()) :: float()
+  defp string_to_float(number_string) do
+    {num, _} = Float.parse(number_string)
+    num
+  end
 
 end
