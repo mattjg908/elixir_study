@@ -3,6 +3,8 @@ defmodule CharlistExample do
   Module for Charlist examples.
   """
 
+  @accepted_ascii_char_codes 32..126
+
   @doc """
   CharlistExample.space_through_tilde?
 
@@ -22,7 +24,11 @@ defmodule CharlistExample do
 
   """
   @spec space_through_tilde?(nonempty_charlist()) :: boolean()
-  def space_through_tilde?(charlist), do: 1
+  def space_through_tilde?(charlist) do
+    Enum.all?(charlist, fn code ->
+      Enum.member?(@accepted_ascii_char_codes, code)
+    end)
+  end
 
   @doc """
   CharlistExample.anagram?
