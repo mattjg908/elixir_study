@@ -50,7 +50,18 @@ defmodule CharlistExample do
 
   """
   @spec anagram?(String.t(), String.t()) :: boolean()
-  def anagram?(tax_rates, orders), do: 2
+  def anagram?(string1, string2) do
+    format_for_comparison(string1) == format_for_comparison(string2)
+  end
+
+  @spec format_for_comparison(String.t()) :: charlist()
+  defp format_for_comparison(string) do
+    string
+    |> String.trim()
+    |> String.downcase()
+    |> to_charlist()
+    |> Enum.sort()
+  end
 
   @doc """
   CharlistExample.calculate
