@@ -3,7 +3,7 @@ defmodule CharlistExample do
   Module for Charlist examples.
   """
 
-  @accepted_ascii_char_codes 32..126
+  @space_through_tilde_ascii_codes ?\s..?~
 
   @doc """
   CharlistExample.space_through_tilde?
@@ -16,19 +16,16 @@ defmodule CharlistExample do
 
   ## Examples
 
-  iex> CharlistExample.space_through_tilde?('cat')
+  iex> CharlistExample.space_through_tilde?(' cat~')
   true
 
-  iex> CharlistExample.space_through_tilde?('¾')
+  iex> CharlistExample.space_through_tilde?(' cat¾')
   false
 
   """
   @spec space_through_tilde?(nonempty_charlist()) :: boolean()
-  def space_through_tilde?(charlist) do
-    Enum.all?(charlist, fn code ->
-      Enum.member?(@accepted_ascii_char_codes, code)
-    end)
-  end
+  def space_through_tilde?(charlist),
+    do: Enum.all?(charlist, &Enum.member?(@space_through_tilde_ascii_codes, &1))
 
   @doc """
   CharlistExample.anagram?
@@ -69,7 +66,7 @@ defmodule CharlistExample do
   (Hard) Write a function that takes a single-quoted string of the
   form number [+-*/] number and returns the result of the
   calculation. The individual numbers do not have leading plus or
-  minus signs. 
+  minus signs.
 
   ## Parameters
      - Charlist (charlist)
@@ -77,13 +74,43 @@ defmodule CharlistExample do
   ## Examples
 
   iex> CharlistExample.calculate('1 + 2')
-  3
+  3.0
 
   iex> CharlistExample.calculate('1 - 2')
-  -1
+  -1.0
 
   """
   @spec calculate(nonempty_charlist()) :: number()
-  def calculate(charlist), do: false
+  def calculate(charlist) do
+    charlist
+    |> parse_charlist
+    |> do_calc
+  end
+
+  @spec parse_charlist(charlist()) :: tuple()
+  defp parse_charlist(charlist) do
+    [x, operator, y] =
+      charlist
+      |> to_string
+      |> String.split(" ")
+
+    {string_to_float(x), string_to_fun(operator), string_to_float(y)}
+  end
+
+  @spec string_to_float(String.t()) :: float()
+  defp string_to_float(number_string) do
+    {num, _} = Float.parse(number_string)
+    num
+  end
+
+  @spec string_to_fun(String.t()) :: fun()
+  defp string_to_fun("+"), do: &+/2
+  defp string_to_fun("-"), do: &-/2
+  defp string_to_fun("*"), do: &*/2
+  defp string_to_fun("/"), do: &//2
+
+  # TODO, how to make a List typespec with multiple types?
+  @spec do_calc(tuple()) :: number()
+  defp do_calc({x, fun, y}), do: fun.(x, y)
 
 end
